@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>mystudyingplan</title>
+</head>
+<style>
+    ul{
+    list-style:none;
+    height:25px;
+    overflow:hidden
+    }
+</style>
+
+<body>
+    <h3>標語:</h3>
+    <ul id="標語">
+      <li>努力，才能壯大自己。勤學，才能造就自己。</li>
+      <li>聯考之際，放鬆壓力。提前進場，以免擁擠。</li>
+      <li>遭遇難題，冷靜梳理。認真檢查，多多有益。</li>
+    </ul>
+    <p id="concept accumulated">0 概念已學習</p>
+    <button onclick="study()">念書</button>
+    <button onclick="buyConceptPerClick()" id="perClickUpgrade">升級閲讀速度 (目前 Level 1) 花費: 100 概念</button>
+
+
+    <script src="main.js" charset="utf-8" type="text/javascript"></script>
+
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>mystudyingplan</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <!-- Add icon library -->
+        <link 
+        href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" 
+        rel="stylesheet"  type='text/css'>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="#!">階段：高中
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active"><a class="nav-link" href="#自習室">自習室</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#番茄鐘">番茄鐘</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#日記">日記</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#設置">設置</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!--自習室-->
+        <section  style="display:none;" id="自習室" >
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5">
+                    <div class="col-lg-6">
+                        <h1 class="mt-5" >
+                            <ul id="biaoyu">
+                                <li>把玩樂留給考完，把喜悅留給考上。</li>
+                                <li>比失敗更痛苦的，叫我本來可以。</li>
+                                <li>妥協未必是種犧牲。</li>
+                                <li>你需要拼盡全力，才能讓人看起來毫不費力。</li>
+                                <li>改變是辛苦的，但不改變，未來會更辛苦。</li>
+                                <li>人的極限就是無限。</li>                            
+                            </ul>
+                        </h1>
+                        <p>考生們的未來掌握在自己的手裏。</p>
+                        <p id="concept accumulated">0 概念已學習</p>
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <button type="button" class="btn btn-primary ml-1" onclick="study()"><i class="fa fa-book"></i> | 念書</button>
+                        </div>
+                        <p id=""></p>
+
+                        <p id="studyskills">習得讀書技巧</p>
+                             <div class="d-grid gap-2 col-6 mx-auto" id="buyskills">
+                                <button type="button" class="btn btn-light" onclick="buyConceptPerClick()" id="perClickUpgrade" title="X2每次念書獲得的概念">升級閲讀速度 (目前 Level 1) <br>花費: 100 概念</button>    
+                                    
+                             </div>
+                        <p id="studyskills">已知讀書技巧</p>
+                            <div class="btn-group" role="group" aria-label="Basic example" id="learnedskills">
+                            <button type="button" class="btn btn-dark" onclick="" id=""><i class="fa fa-gear"></i> | 概念重組</button>
+                                <button type="button" class="btn btn-dark" onclick="" id=""><i class="fa fa-pencil"></i> | 重點畫記</button>
+                            </div>
+                        <p id="reset"></p>
+                        <!-- Reset button -->
+                        <button type="button" class="btn btn-danger" id="resetButton">重新開始 Reset</button>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--番茄鐘-->
+        <section  style="display:none;" id="番茄鐘">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5">
+                    <div class="col-lg-6">
+                        <h1 class="mt-5" >
+                        距離2024年學測剩下
+                        </h1>
+                <!-- Display the countdown timer in an element -->
+                <p id="demo"></p>
+                    </div>
+                </div>
+                <div class="container" style="margin-top:0px;">
+                    <div class="page-header">
+                      <h1 class="text-center">番茄鐘讀書法</h1>
+                      <h2 class="text-center">
+                        <span>
+                          <button id="pomodoroButton" class="btn btn-default" type="submit" onclick="onPomodoroTimer()" >工作</button>
+                          <button id="shortButton" class="btn btn-default" type="submit" onclick="onShortTimer()">短休息</button>
+                          <button id="longButton" class="btn btn-default" type="submit" onclick="onLongTimer()">長休息</button>
+                        </span>
+                      </h2>
+                    </div>
+                    <div class="panel panel-default">
+                      <div class="panel-body text-center">
+                        <div class="timer-time timer-container">
+                          <div class="timer-time-set timer-box" id="currentTime">
+                            <span id="hoursValue">00</span><span>:</span><span id="minutesValue">00</span><span>:</span><span id="secondsValue">00</span>
+                          </div>
+                          <div class="timer-time-set timer-box" id="nextTime">
+                            <span id="hoursNext">00</span><span>:</span><span id="minutesNext">00</span><span>:</span><span id="secondsNext">00</span>
+                          </div>
+                        </div>
+                        <p id="space"></p>
+                        <div>
+                          <button id="restartButton" class="btn btn-warning btn-lg" type="submit" onclick="onResetTimer()">
+                            <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span> 重置
+                          </button>
+                          <button id="startButton" class="btn btn-primary btn-lg" type="submit" onclick="onStartTimer()">
+                            <span class="glyphicon glyphicon-play" aria-hidden="true"></span> 開始
+                          </button>
+                          <button id="stopButton" class="btn btn-danger btn-lg" type="submit" onclick="onStopTimer()">
+                            <span class="glyphicon glyphicon-stop" aria-hidden="true"></span> 暫停
+                          </button>
+                        </div>
+                      </div>
+                    </br></br></br></br>
+                      這個網站真的可以拿來念書，驚不驚喜！
+                
+                    </div>
+                
+                </div>
+                
+                  
+                
+                  
+
+                <script type="text/javascript">
+                
+                  var _gaq = _gaq || [];
+                  _gaq.push(['_setAccount', 'UA-36251023-1']);
+                  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+                  _gaq.push(['_trackPageview']);
+                
+                  (function() {
+                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                  })();
+                
+                </script>
+
+
+            </div>
+        </section>
+        <!--日記-->
+        <section  style="display:none;" id="日記">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5">
+                    <div class="col-lg-8">
+                        <h1 class="mt-5" >
+                            日記
+                        </h1>
+
+                        <!-- Block level -->
+                        <div class="row">
+                        </br></br>
+                            <div class="col-12">
+                                <i>   </br></br> 早上，起床後就打開書，對著書本咬牙切齒地看，老師說考試前不要太緊張，但是我不禁擔憂自己會不會什麼都忘光光。每一篇文章，每一個數學公式，我都要反覆看，希望能留在腦海中。
+                            </br></br>
+                                下午，約了幾個朋友一起去圖書館溫習。一走進去，就看到大家的表情都有些緊張，就像我一樣。我們坐在一起，彼此打氣，但心裡都清楚，這個考試對我們的未來太重要了。
+                        </br></br>
+                                晚上，回家之後，我試著放鬆一下，看個電影。但無論看什麼，我的腦袋總是轉不過彎，總是想著明天的考試。這種焦慮實在難以避免。
+                            </div> </i>
+                        </div>
+                    </br></br>                            </br></br>
+                        <p id="studyskills">已知讀書技巧</p>
+                        <div class="btn-group" role="group" aria-label="Basic example" id="learnedskills">
+                        <button type="button" class="btn btn-dark" onclick="" id=""><i class="fa fa-gear"></i> | 概念重組</button>
+                            <button type="button" class="btn btn-dark" onclick="" id=""><i class="fa fa-pencil"></i> | 重點畫記</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--設置-->
+        <section  style="display:none;" id="設置">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5">
+                    <div class="col-lg-6">
+                    <h1 class="mt-5" >
+                        設置
+                    </h1>
+
+                    <form>
+                        <div class="form-group row">
+                          <label for="staticEmail" class="col-sm-3 col-form-label">玩家年級：</label>
+                          <div class="col-sm-9">
+                            <input type="text" readonly class="form-control-plaintext-sm" id="玩家年級" value="高三">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputPassword" class="col-sm-3 col-form-label">玩家姓名：</label>
+                          <div class="col-sm-9">
+                            <input type="password" class="form-control-sm" id="玩家姓名" placeholder="學測戰士">
+                          </div>
+                          
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-3 col-form-label">離線學習：</label>
+                            <div class="col-sm-9">
+                              <input type="text" readonly class="form-control-plaintext-sm" id="離線學習：" value="未解鎖">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-3 col-form-label">語言：</label>
+                            <div class="col-sm-9">
+                                <select class="form-control form-control-sm">
+                                <option>繁體中文</option>
+                                </select>
+                        </div>
+                        </div>
+                        <p id="lastsaving">上次存檔：</p>
+
+                      </form>
+
+
+                    <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="地獄模式（開發中）" disabled>
+                    <label class="form-check-label" for="flexSwitchCheckDisabled">勿擾模式（開發中）</label>
+                    </div>
+
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="深色模式（開發中）" disabled>
+                        <label class="form-check-label" for="flexSwitchCheckDisabled">深色模式（開發中）</label>
+                        </div>  
+                    版本：V1 <br>
+                 
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <script src="js/countdown.js"></script>
+        
+    </body>
+</html>
